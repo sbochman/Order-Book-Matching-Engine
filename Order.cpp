@@ -11,6 +11,10 @@ const bool Order::is_sell() const {
     return this->sell;
 }
 
+const bool Order::is_buy() const {
+    return !this->sell;
+}
+
 const std::chrono::system_clock::time_point Order::get_time() const {
     return this->time;
 }

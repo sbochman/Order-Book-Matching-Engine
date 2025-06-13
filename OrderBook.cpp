@@ -1,5 +1,10 @@
 #include "OrderBook.h"
 #include <stdexcept>
+#include <iostream>
+
+OrderBook::OrderBook(){
+  matching_engine = MatchingEngine();
+}
 
 // Add order to the appropriate side
 void OrderBook::add_order(const Order& order) {
@@ -11,29 +16,34 @@ void OrderBook::add_order(const Order& order) {
 }
 
 // Get and remove the best buy order (highest price, FIFO)
-Order OrderBook::get_best_buy_order() {
-    if (buy_orders.empty())
-        throw std::runtime_error("No buy orders!");
-    // rbegin() gives the highest price
-    auto it = buy_orders.rbegin();
-    Order best_order = it->second.front();
-    it->second.pop_front();
-    if (it->second.empty()) {
-        // Need to erase the key in the map using base() - 1
-        buy_orders.erase(std::next(it).base());
+std::optional<Order> OrderBook::get_best_buy_order(Order& sell_order) {
+    std::optional<Order> match = matching_engine.find_best_matching(sell_order, buy_orders);
+    if (match != std::nullopt) {
+      return *match;
     }
-    return best_order;
+    return std::nullopt;
 }
 
 // Get and remove the best sell order (lowest price, FIFO)
-Order OrderBook::get_best_sell_order() {
-    if (sell_orders.empty())
-        throw std::runtime_error("No sell orders!");
-    auto it = sell_orders.begin();
-    Order best_order = it->second.front();
-    it->second.pop_front();
-    if (it->second.empty()) {
-        sell_orders.erase(it);
+std::optional<Order> OrderBook::get_best_sell_order(Order& buy_order) {
+    std::optional<Order> match = matching_engine.find_best_matching(buy_order, sell_orders);
+    if (match != std::nullopt) {
+      return *match;
     }
-    return best_order;
+    return std::nullopt;
+}
+
+void OrderBook::print_orders() {
+  for (auto& price : sell_orders) {
+    for (auto& order : price.second) {
+      std::cout << order.get_value();
+    }
+    std::cout << std::endl;
+  }
+  for (auto& price : buy_orders) {
+    for (auto& order : price.second) {
+      std::cout << order.get_value();
+    }
+    std::cout << std::endl;
+  }
 }

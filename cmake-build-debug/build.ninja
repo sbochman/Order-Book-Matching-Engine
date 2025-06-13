@@ -67,6 +67,12 @@ build CMakeFiles/Order_Matching_Engine.dir/OrderBook.cpp.obj: CXX_COMPILER__Orde
   OBJECT_DIR = CMakeFiles\Order_Matching_Engine.dir
   OBJECT_FILE_DIR = CMakeFiles\Order_Matching_Engine.dir
 
+build CMakeFiles/Order_Matching_Engine.dir/MatchingEngine.cpp.obj: CXX_COMPILER__Order_Matching_Engine_unscanned_Debug C$:/Users/seanb/OneDrive/Desktop/Order-Matching-Engine/MatchingEngine.cpp || cmake_object_order_depends_target_Order_Matching_Engine
+  DEP_FILE = CMakeFiles\Order_Matching_Engine.dir\MatchingEngine.cpp.obj.d
+  FLAGS = -g -std=gnu++20 -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles\Order_Matching_Engine.dir
+  OBJECT_FILE_DIR = CMakeFiles\Order_Matching_Engine.dir
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target Order_Matching_Engine
@@ -75,7 +81,7 @@ build CMakeFiles/Order_Matching_Engine.dir/OrderBook.cpp.obj: CXX_COMPILER__Orde
 #############################################
 # Link the executable Order_Matching_Engine.exe
 
-build Order_Matching_Engine.exe: CXX_EXECUTABLE_LINKER__Order_Matching_Engine_Debug CMakeFiles/Order_Matching_Engine.dir/main.cpp.obj CMakeFiles/Order_Matching_Engine.dir/Order.cpp.obj CMakeFiles/Order_Matching_Engine.dir/OrderBook.cpp.obj
+build Order_Matching_Engine.exe: CXX_EXECUTABLE_LINKER__Order_Matching_Engine_Debug CMakeFiles/Order_Matching_Engine.dir/main.cpp.obj CMakeFiles/Order_Matching_Engine.dir/Order.cpp.obj CMakeFiles/Order_Matching_Engine.dir/OrderBook.cpp.obj CMakeFiles/Order_Matching_Engine.dir/MatchingEngine.cpp.obj
   FLAGS = -g
   LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\Order_Matching_Engine.dir
